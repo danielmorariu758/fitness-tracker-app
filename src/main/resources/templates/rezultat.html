@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Planul Tau Personalizat</title>
+</head>
+<body>
+<div>
+    <h1>Felicitari, <span th:text="${numeUtilizator}">Utilizator</span>!</h1>
+    <p>Planul tau nutritonal generat este gata: </p>
+
+    <hr>
+    <div>Target Caloric Zilnic</div>
+    <div><span th:text="${caloriiTarget}">2000</span> kcal</div>
+    <div><span th:text="${proteineTarget}">150</span> g</div>
+    <hr>
+
+    <a href="/">Modifica datele</a>
+</div>
+</body>
+</html>

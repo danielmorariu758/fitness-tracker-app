@@ -31,15 +31,15 @@ public class UserProfile {
         this.nume = nume;
     }
 
-    public LocalDate getVarsta() {
+    public LocalDate getDataNastere() {
         return dataNastere;
     }
 
-    public void setVarsta(LocalDate dataNastere) {
+    public void setDataNastere(LocalDate dataNastere) {
         this.dataNastere = dataNastere;
     }
 
-    public Gen getGet() {
+    public Gen getGen() {
         return gen;
     }
 

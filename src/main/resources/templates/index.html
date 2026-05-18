@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Fitness Tracker</title>
+</head>
+<body>
+    <div class="container">
+        <h2>Introduceti datele</h2>
+        <form action="/calcul" method="POST">
+            <div>
+                <label>Nume</label>
+                <input type="text" name="nume" required>
+            </div>
+
+            <div>
+                <label>Data nasterii</label>
+                <input type="date" name="dataNastere" required>
+            </div>
+
+            <div>
+                <label>Gen</label>
+                <select name="gen">
+                    <option value="MASCULIN">Masculin</option>
+                    <option value="FEMININ">Feminin</option>
+                </select>
+            </div>
+
+            <div>
+                <label>Greutate</label>
+                <input type="number" step="0.1" name="greutate" required>
+            </div>
+
+            <div>
+                <label>Inaltime</label>
+                <input type="number" name="inaltime">
+            </div>
+
+            <div>
+                <label>Obiectiv</label>
+                <select name="obiectiv">
+                    <option value="SLABIRE">Slabire</option>
+                    <option value="MASA_MUSCULARA">Masa musculara</option>
+                    <option value="MENTINERE">Mentinere</option>
+                </select>
+            </div>
+
+            <button type="submit">Calculeaza</button>
+        </form>
+    </div>
+</body>
+</html>
