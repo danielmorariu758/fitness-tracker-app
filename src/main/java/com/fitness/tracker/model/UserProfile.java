@@ -1,13 +1,22 @@
 package com.fitness.tracker.model;
 
+import jakarta.persistence.*;
+
 import java.time.LocalDate;
 
+@Entity
 public class UserProfile {
+
+    @Id
+    @GeneratedValue(strategy= GenerationType.AUTO)
+    private Long id;
     private String nume;
     private LocalDate dataNastere;//varsta se actualizeaza cu trecerea timpului
+    @Enumerated(EnumType.STRING)
     private Gen gen;
     private double greutate;
     private int inaltime; //salvam in cm
+    @Enumerated(EnumType.STRING)
     private Obiectiv obiectiv;
 
 
@@ -21,6 +30,10 @@ public class UserProfile {
         this.greutate = greutate;
         this.inaltime = inaltime;
         this.obiectiv = obiectiv;
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public String getNume() {

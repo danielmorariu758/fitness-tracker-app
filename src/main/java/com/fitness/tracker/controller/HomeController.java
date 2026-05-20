@@ -3,6 +3,7 @@ package com.fitness.tracker.controller;
 import com.fitness.tracker.model.Gen;
 import com.fitness.tracker.model.Obiectiv;
 import com.fitness.tracker.model.UserProfile;
+import com.fitness.tracker.repository.UserProfileRepository;
 import com.fitness.tracker.service.FitnessService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,6 +19,9 @@ public class HomeController {
 
     @Autowired
     private FitnessService fitnessService;
+
+    @Autowired
+    private UserProfileRepository userProfileRepository;
 
     @GetMapping("/")
     public String pornire() {
@@ -37,6 +41,7 @@ public class HomeController {
         LocalDate dataNastereParsata = LocalDate.parse(dataNastere);
 
         UserProfile profil = new UserProfile(nume, dataNastereParsata, gen, greutate, inaltime, obiectiv);
+        userProfileRepository.save(profil);
 
         double rezultatCalorii = fitnessService.calculeazaCaloriiZilnice(profil);
 
