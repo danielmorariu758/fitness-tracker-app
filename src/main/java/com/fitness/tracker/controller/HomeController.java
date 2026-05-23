@@ -1,10 +1,9 @@
 package com.fitness.tracker.controller;
 
-import com.fitness.tracker.model.Gen;
-import com.fitness.tracker.model.Obiectiv;
-import com.fitness.tracker.model.UserProfile;
+import com.fitness.tracker.dto.RezultatMetabolic;
+import com.fitness.tracker.model.*;
 import com.fitness.tracker.repository.UserProfileRepository;
-import com.fitness.tracker.service.FitnessService;
+import com.fitness.tracker.service.CalculatorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,12 +15,6 @@ import java.time.LocalDate;
 
 @Controller
 public class HomeController {
-
-    @Autowired
-    private FitnessService fitnessService;
-
-    @Autowired
-    private UserProfileRepository userProfileRepository;
 
     @GetMapping("/")
     public String pornire() {
@@ -36,18 +29,23 @@ public class HomeController {
             @RequestParam double greutate,
             @RequestParam int inaltime,
             @RequestParam Obiectiv obiectiv,
+            @RequestParam NivelActivitate nivelActivitate,
+
             Model model) {
 
         LocalDate dataNastereParsata = LocalDate.parse(dataNastere);
 
         UserProfile profil = new UserProfile(nume, dataNastereParsata, gen, greutate, inaltime, obiectiv);
-        userProfileRepository.save(profil);
 
-        double rezultatCalorii = fitnessService.calculeazaCaloriiZilnice(profil);
+        RezultatMetabolic rezultatMeta = CalculatorService.proceseazaProfil(
+                profil, nivelActivitate);
 
         model.addAttribute("numeUtilizator", nume);
-        model.addAttribute("caloriiTarget", (int)rezultatCalorii);
-        model.addAttribute("proteineTarget", (int)profil.getGreutate() * 2);
+        model.addAttribute("caloriiTarget", rezultatMeta.caloriiTinta());
+        model.addAttribute("proteineTarget", rezultatMeta.macro().grameProteine());
+        model.addAttribute("bmr", rezultatMeta.bmr());
+        model.addAttribute("tdee", rezultatMeta.tdee());
+        model.addAttribute("pal", rezultatMeta.valoarePal());
 
         return "rezultat";
     }

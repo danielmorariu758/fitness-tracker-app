@@ -3,6 +3,7 @@ package com.fitness.tracker.model;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.time.Period;
 
 @Entity
 public class UserProfile {
@@ -10,6 +11,7 @@ public class UserProfile {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Long id;
+
     private String nume;
     private LocalDate dataNastere;//varsta se actualizeaza cu trecerea timpului
     @Enumerated(EnumType.STRING)
@@ -18,7 +20,6 @@ public class UserProfile {
     private int inaltime; //salvam in cm
     @Enumerated(EnumType.STRING)
     private Obiectiv obiectiv;
-
 
     public UserProfile(){};
 
